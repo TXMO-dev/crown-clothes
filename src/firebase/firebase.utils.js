@@ -18,6 +18,32 @@ firebase.initializeApp(fire_api);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+export const joiningAuthToDatabase = async (authChange,allowedFields) => {
+  if(!authChange) return;
+    const userRef = firestore.doc(`users/${authChange.uid}`);
+    const snapShot = await userRef.get();
+
+    if(!snapShot.exists){
+      const {displayName,email} = authChange;
+      const createdAt = new Date();
+      try{
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,  
+          ...allowedFields 
+        });  
+
+      }catch(err){
+        console.log('error message',err.message);
+      }
+
+    }
+
+    return userRef;
+
+}
+
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({prompt:'select_account'});
 export const signinwithgoogle = () => auth.signInWithPopup(provider);  
