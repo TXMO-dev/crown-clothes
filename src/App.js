@@ -2,7 +2,7 @@ import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
 
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 import Homepage from './pages/homepage/hompage.components';
 import Shop from './pages/shop/shop.component';
@@ -34,7 +34,7 @@ class App extends React.Component {
       );
     }
 
-    setCurrentUser({currentUser:userAuth});
+    //setCurrentUser({currentUser:userAuth});
 
       
   }
@@ -52,7 +52,14 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={Homepage} /> 
           <Route exact path='/shop' component={Shop} />  
-          <Route exact path='/signin' component={Signinandsignup} />          
+          <Route exact path='/signin' render = {() => (this.props.currentUser ? (
+          <Redirect to='/'/>
+          ) : (
+          <Signinandsignup/>
+          ) 
+          )
+          } 
+          />             
         </Switch>
       </div>   
       
@@ -60,7 +67,10 @@ class App extends React.Component {
   }
   
 }
+const matchStateToProp = ({user}) => ({
+  currentUser: user.currentUser
+})
 const matchDispatchtoState = dispatch =>({
   setCurrentUser:user => dispatch(Setcurrentuser(user))
-})
-export default connect(null,matchDispatchtoState)(App);
+});
+export default connect(matchStateToProp,matchDispatchtoState)(App);

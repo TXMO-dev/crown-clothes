@@ -24,7 +24,7 @@ const Header = ({currentUser}) => (
         </div>
     </div>
 )
-const matchStateToProps = root_reducer => ({
-    currentUser:root_reducer.user.currentUser
+const matchStateToProps = ({user}) => ({
+    currentUser:user.currentUser
 })
 export default connect(matchStateToProps)(Header);
