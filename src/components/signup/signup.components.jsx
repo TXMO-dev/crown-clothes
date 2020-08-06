@@ -56,7 +56,7 @@ class Signup extends React.Component{
                 name='displayName'
                 label='displayName'
                 value={displayName}
-                handleChange = {this.handleChange}  
+                handleChange = {this.handleChange}      
                 required
                 />
 
