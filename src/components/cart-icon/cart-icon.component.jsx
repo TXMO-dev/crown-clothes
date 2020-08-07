@@ -4,6 +4,7 @@ import './cart-icon.styles.scss';
 import {connect} from 'react-redux';
 import {cartAction} from './../../redux/cart/cart-actions';
 import {saveaccumulatedValueToCache} from './../../redux/cart/cart.selectors';
+import {createStructuredSelector} from 'reselect';
 
 const cartIcon = ({cartAction,cartItem}) => (
     <div className='cart-icon' onClick = {cartAction}>
@@ -13,9 +14,9 @@ const cartIcon = ({cartAction,cartItem}) => (
     
 );
 
-const matchStateToProps = root_reducer => ({
-    cartItem:saveaccumulatedValueToCache(root_reducer)     
-})
+const matchStateToProps = createStructuredSelector({
+    cartItem:saveaccumulatedValueToCache   
+})  
 
 
 const toMatchDispatchToProp = dispatch => ({

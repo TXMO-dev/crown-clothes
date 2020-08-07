@@ -11,6 +11,9 @@ import Signinandsignup from './pages/sign-in-and-sign-up/sign-in-and-sign-up.com
 import {auth,joiningAuthToDatabase} from './firebase/firebase.utils';
 import {connect} from 'react-redux';
 import Setcurrentuser from './redux/user/user.action';
+import {createStructuredSelector} from 'reselect';
+import {selectCurrentUserOutput} from './redux/user/user.selectors';
+import Checkoutpage from './pages/checkout/checkout.components';
 
 class App extends React.Component {
 
@@ -59,7 +62,8 @@ class App extends React.Component {
           ) 
           )
           } 
-          />             
+          />
+          <Route exact path='/checkout' component={Checkoutpage} />            
         </Switch>
       </div>   
       
@@ -67,8 +71,8 @@ class App extends React.Component {
   }
   
 }
-const matchStateToProp = ({user}) => ({
-  currentUser: user.currentUser
+const matchStateToProp = createStructuredSelector({
+  currentUser: selectCurrentUserOutput  
 })
 const matchDispatchtoState = dispatch =>({
   setCurrentUser:user => dispatch(Setcurrentuser(user))

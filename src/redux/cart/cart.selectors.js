@@ -7,6 +7,11 @@ export const saveCartItemsToLocalCache = createSelector(
     cart => cart.cartItem
 )
 
+export const saveHiddenCartToLocaleCache = createSelector(
+    [inputSelectorCart],
+    cart => cart.hidden  
+)
+
 export const saveaccumulatedValueToCache = createSelector(
     [saveCartItemsToLocalCache],
     cartItem => cartItem.reduce(
