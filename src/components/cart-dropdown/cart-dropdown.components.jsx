@@ -3,6 +3,7 @@ import './cart-dropdown.styles.scss';
 import Custombutton from './../custom-button/custom-button.components';
 import {connect} from 'react-redux';
 import Cartitem from './../cart-item/cart-item.components';
+import {saveCartItemsToLocalCache} from './../../redux/cart/cart.selectors';
 
 const cartDropdown = ({cartItem}) => (
     <div className = 'cart-dropdown'>
@@ -14,7 +15,7 @@ const cartDropdown = ({cartItem}) => (
         <Custombutton>GO TO CHECKOUT</Custombutton>
     </div>
 );
-const mapStateToProps = ({cart:{cartItem}}) => ({
-    cartItem
+const mapStateToProps = root_reducer => ({
+    cartItem:saveCartItemsToLocalCache(root_reducer)
 })
 export default connect(mapStateToProps)(cartDropdown);  
