@@ -14,7 +14,7 @@ class Shop extends React.Component{
 
     render(){
         return(
-            <div className='shop-page'>          
+            <div className='shop-page'>            
                 {
                     SHOP_DATA.map(({id,...otherProps}) => (
                         <Collectionpreview key={id} {...otherProps}/>

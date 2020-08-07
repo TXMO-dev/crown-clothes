@@ -4,6 +4,12 @@
   flex-direction: column;
   height: 350px;
   align-items: center;
+  position:relative;
+
+  &:hover .custom-button{
+    opacity:1;
+    visibility:visible;
+  }
 
   .image {
     width: 100%;
@@ -12,7 +18,14 @@
     background-position: center;
     margin-bottom: 5px;
   }
-
+  .custom-button{
+    position:absolute;
+    top:90%;
+    left:50%;
+    transform: translate(-50%,-90%);
+    opacity:0;
+    visibility:hidden;
+  }
   .collection-footer {
     width: 100%;
     height: 5%;
