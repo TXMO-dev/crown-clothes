@@ -5,8 +5,9 @@ import {connect} from 'react-redux';
 import Cartitem from './../cart-item/cart-item.components';
 import {saveCartItemsToLocalCache} from './../../redux/cart/cart.selectors';
 import {withRouter} from 'react-router-dom';
+import {cartAction} from './../../redux/cart/cart-actions'
 
-const cartDropdown = ({cartItem,history}) => (
+const cartDropdown = ({cartItem,history,dispatch}) => (
     <div className = 'cart-dropdown'>
         <div className='cart-items'>
             {cartItem.length ?   
@@ -14,7 +15,11 @@ const cartDropdown = ({cartItem,history}) => (
             : (<span className='empty-message'>Your Cart Is Empty</span>)
             }
         </div>
-        <Custombutton onClick={() => {history.push('/checkout')}}>GO TO CHECKOUT</Custombutton>           
+        <Custombutton onClick={() => {
+            history.push('/checkout');
+            dispatch(cartAction());
+            
+            }}>GO TO CHECKOUT</Custombutton>           
     </div>
 );
 const mapStateToProps = root_reducer => ({

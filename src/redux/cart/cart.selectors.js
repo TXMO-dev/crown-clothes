@@ -18,4 +18,12 @@ export const saveaccumulatedValueToCache = createSelector(
         (acc,cartItems) => acc + cartItems.quantity,
         0
     )  
+) 
+
+export const saveaccumulatedTotalToCache = createSelector(
+    [saveCartItemsToLocalCache],
+    cartItem => cartItem.reduce(
+        (acc,cartItems) => acc + cartItems.quantity * cartItems.price,
+        0
+    )  
 )  
