@@ -8,3 +8,13 @@ export const addItemAction = item => ({
     type:Carttypes.ALL_ITEMS,
     payload:item
 })
+
+export const removeItemAction = item => ({
+    type:Carttypes.REMOVE_ITEMS,
+    payload:item 
+})
+
+export const removeItemLeft = item => ({
+    type:Carttypes.REMOV_LEFT,
+    payload:item
+})
