@@ -1,0 +1,7 @@
+
+
+const SHOP_TYPES = {
+    UPDATE_COLLECTION:'UPDATE_COLLECTION'
+}
+
+export default SHOP_TYPES;

@@ -11,11 +11,11 @@ export const selectShop = createSelector(
 
 export const selectShopItems = createSelector(
     [selectShop],
-    shop => Object.keys(shop).map(map => shop[map])
+    shop => shop ? (Object.keys(shop).map(map => shop[map])) : ([])
 )
 
 export const selectItemId = memoize((urlParam) => 
     createSelector(
         [selectShop],
-        shop => shop[urlParam]    
+        shop => shop ? (shop[urlParam]):(null)        
     ))

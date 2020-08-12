@@ -14,6 +14,8 @@ import Setcurrentuser from './redux/user/user.action';
 import {createStructuredSelector} from 'reselect';
 import {selectCurrentUserOutput} from './redux/user/user.selectors';
 import Checkoutpage from './pages/checkout/checkout.components';
+//import {selectShopItems} from './redux/shop/shop.select';
+//import {addCollectionsAndDocuments} from './firebase/firebase.utils';
 
 class App extends React.Component {
 
@@ -30,13 +32,14 @@ class App extends React.Component {
         setCurrentUser({
           currentUser:{
             id:snapshot.id,
-            ...snapshot.data()   
+            ...snapshot.data()  //but for the shop we just did the .data in a new firebase function 
           }
         })
       }
       );
     }
 
+    //addCollectionsAndDocuments('collections',collectionsArray.map(({title,items}) => ({title,items})));       
     //setCurrentUser({currentUser:userAuth});
 
       
@@ -72,7 +75,8 @@ class App extends React.Component {
   
 }
 const matchStateToProp = createStructuredSelector({
-  currentUser: selectCurrentUserOutput  
+  currentUser: selectCurrentUserOutput,
+  //collectionsArray: selectShopItems 
 })
 const matchDispatchtoState = dispatch =>({
   setCurrentUser:user => dispatch(Setcurrentuser(user))
