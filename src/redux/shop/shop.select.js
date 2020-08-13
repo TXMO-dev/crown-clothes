@@ -17,5 +17,10 @@ export const selectShopItems = createSelector(
 export const selectItemId = memoize((urlParam) => 
     createSelector(
         [selectShop],
-        shop => shop ? (shop[urlParam]):(null)        
+        shop => shop ? shop[urlParam]:null        
     ))
+
+export const selectFetching = createSelector(
+    [inputSelector],
+    shop => shop.isFetching
+)
