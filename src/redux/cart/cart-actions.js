@@ -18,3 +18,7 @@ export const removeItemLeft = item => ({
     type:Carttypes.REMOV_LEFT,
     payload:item
 })
+
+export const clearCart = () => ({
+    type:Carttypes.CLEAR_CART  
+})

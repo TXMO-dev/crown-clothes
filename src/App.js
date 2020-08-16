@@ -8,47 +8,33 @@ import Homepage from './pages/homepage/hompage.components';
 import Shop from './pages/shop/shop.component';
 import Header from './components/header/header.components';
 import Signinandsignup from './pages/sign-in-and-sign-up/sign-in-and-sign-up.components';
-import {auth,joiningAuthToDatabase} from './firebase/firebase.utils';
+//import {auth,joiningAuthToDatabase} from './firebase/firebase.utils';
 import {connect} from 'react-redux';
-import Setcurrentuser from './redux/user/user.action';
+//import {Setcurrentuser} from './redux/user/user.action';
 import {createStructuredSelector} from 'reselect';
 import {selectCurrentUserOutput} from './redux/user/user.selectors';
 import Checkoutpage from './pages/checkout/checkout.components';
 //import {selectShopItems} from './redux/shop/shop.select';
 //import {addCollectionsAndDocuments} from './firebase/firebase.utils';
+import {checkusersession} from './redux/user/user.action';
 
 class App extends React.Component {
 
 
 
-  unsubscribedUser = null;
+  //unsubscribedUser = null;
 
   componentDidMount(){
-    const {setCurrentUser} = this.props;
-    this.unsubscribedUser = auth.onAuthStateChanged(async userAuth => {
-    if(userAuth){
-      const  userRef = await joiningAuthToDatabase(userAuth);
-      userRef.onSnapshot(snapshot => {
-        setCurrentUser({
-          currentUser:{
-            id:snapshot.id,
-            ...snapshot.data()  //but for the shop we just did the .data in a new firebase function 
-          }
-        })
-      }
-      );
-    }
-
+    const {checkusersession} = this.props;
+    checkusersession();
+    
     //addCollectionsAndDocuments('collections',collectionsArray.map(({title,items}) => ({title,items})));       
     //setCurrentUser({currentUser:userAuth});
 
-      
-  }
-    );
   }
 
   componentWillUnmount(){
-    this.unsubscribedUser();
+    //this.unsubscribedUser();
   }
 
   render(){
@@ -78,7 +64,9 @@ const matchStateToProp = createStructuredSelector({
   currentUser: selectCurrentUserOutput,
   //collectionsArray: selectShopItems 
 })
-const matchDispatchtoState = dispatch =>({
-  setCurrentUser:user => dispatch(Setcurrentuser(user))
-});
-export default connect(matchStateToProp,matchDispatchtoState)(App);
+
+const matchDispatchToProps = dispatch => ({
+  checkusersession:() => dispatch(checkusersession())
+})
+
+export default connect(matchStateToProp,matchDispatchToProps)(App);

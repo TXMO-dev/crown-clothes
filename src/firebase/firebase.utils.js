@@ -81,8 +81,16 @@ export const convertFromArrayObjectToListObject = (collectionRefSnapshot) => {
     
 };
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({prompt:'select_account'});
-export const signinwithgoogle = () => auth.signInWithPopup(provider);  
+export const checkUserAuthentication = _  => {
+  return new Promise((resolve,reject) => {
+    auth.onAuthStateChanged(userAuth => {
+      resolve(userAuth);
+    },reject) 
+  })
+}
+
+export const google_provider = new firebase.auth.GoogleAuthProvider();
+google_provider.setCustomParameters({prompt:'select_account'});
+//export const signinwithgoogle = () => auth.signInWithPopup(provider);  
 
 export default firebase;

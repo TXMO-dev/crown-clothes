@@ -26,6 +26,7 @@ const shopReducer = (currentState = INITIAL_STATE,action) => {
                 isFetching:false,
                 errorMessage:action.payload
             }
+        
         default:
             return currentState
     }

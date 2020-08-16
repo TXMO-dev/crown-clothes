@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import Withspinner from './../../components/with-spinner/with-spinner.components';
 import {createStructuredSelector} from 'reselect';
 import {selectFetching} from './../../redux/shop/shop.select';
-import {fetchCollectionAsync} from './../../redux/shop/shop.action';
+import {fetchCollectionStart} from './../../redux/shop/shop.action';
 
 
 const CollectionOverviewWithSpinner = Withspinner(Collectionsoverview);
@@ -27,7 +27,7 @@ class Shop extends React.Component{
                     return <CollectionOverviewWithSpinner isLoading={isFetching} {...props}/>
                 }}/>
                 <Route path={`${match.path}/:collectionId`} render = {(props) => {
-                    return <CollectionWithSpinner isLoading={isFetching} {...props} />
+                    return <CollectionWithSpinner isLoading={isFetching} {...props} />   
                 }} />
             </div>  
         )
@@ -40,7 +40,7 @@ const matchStateToProps = createStructuredSelector({
 })        
              
 const matchDispatchToProps = dispatch => ({
-    FetchData: () => dispatch(fetchCollectionAsync())   
+    FetchData: () => dispatch(fetchCollectionStart())   
 });           
      
        
